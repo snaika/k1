@@ -1,0 +1,14 @@
+# Fichiers du module compilé :
+*.ko
+*.mod.c
+*.mod.o
+*.o
+*.order
+*.symvers
+*.o.cmd
+*.ko.cmd
+.tmp_versions/
+
+# Fichiers emacs temporaires :
+*~
+

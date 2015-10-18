@@ -1,0 +1,4 @@
+Scripts (Facultatifs) :
+ - ./start.sh, pour lancer le module en tant que root rapidement
+ - ./stop.sh, pour quitter le module en tant que root rapidement
+

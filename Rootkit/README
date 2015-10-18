@@ -1,0 +1,17 @@
+Root qui va remplacer le syscall open de base par une autre fonction qui va :
+ - Ecrire les paramètres du syscall grâce à pr_info
+ - Effectuer le syscall original
+
+Pour compiler :
+ - make
+Make va appeler le script getSysCallTable.sh si NewOpen.c n'existe pas.
+L'intérêt de ce script est de récupérer l'adresse de la table des syscalls du kernel actuellement utilisé. C'est surement possible de faire ça dans le makefile, mais je n'ai pas envie de chercher comment faire quand je sais le faire en bash.
+
+Scripts (facultatifs) :
+ - ./start.sh pour lancer rapidement en tant que root
+ - ./stop.sh pour arrêter rapidement en tant que root
+
+
+Note importante :
+Il faut modifier le fichier *.tochange.c et non pas l'autre, à cause du script pour compiler. C'est ça ou bien une addresse de sys_call_table en dur, ce qui n'est pas forcément une bonne idée.
+

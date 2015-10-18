@@ -1,0 +1,36 @@
+# Fait sur une Debian8, kernel 4.3.0-rc4 x86_64, dans une vm
+
+Pour ajouter un syscall dans le kernel. (Voir '0001-Please-ignore-if-for-whatever-reason-I-actually-push.patch'
+pour plus de détails).
+     Ajouter le syscall dans arch/entry/syscalls/syscall_64.tbl # Dépend de l'architecture cible
+     Ajouter la signature du syscall dans linux/syscalls.h
+     Ajouter un fichier source dans le dossier kernel (arch/x86/kernel)
+     Et dans le makefile du dossier en question
+
+Pour créer un patch:
+     Faire un commit
+     git format-patch origin
+     # On a maintenant un fichier du style 0001-make-stuff-more-awesome.patch
+
+Pour appliquer un patch
+     git am *.patch
+
+Pour récupérer la dernière version du kernel
+     git clone --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+
+Pour compiler le kernel après avoir appliqué le patch
+     make menuconfig OU make defconfig
+     make
+     make modules
+     make modules_install
+     make install
+     # Pour une raison que je ne sais pas encore (Je n'ai pas regardé en détails), il me semble que le
+     # kernel compilé ne puisse pas charger de module dynamiquement. Je n'ai pas testé, mais il y a un
+     # message d'erreur dans dmesg
+
+
+Pour appeler le syscall:
+     Redémarrer le linux avec le bon kernel # (C'est important)
+     syscall(NUMERO_DU_SYSCALL, [PARAMETRES ...]) # Tadaaa, ça marche ! (Ou pas)
+     # Oui, c'est bourrin, non, je n'ai pas envie de faire une lib pour l'encapsuler
+
