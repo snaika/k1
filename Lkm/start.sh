@@ -9,5 +9,5 @@ then
 fi
 
 
-insmod *.ko
+insmod *.ko || exit -1
 chmod 666 /dev/version
