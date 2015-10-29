@@ -1,0 +1,1 @@
+qemu-system-x86_64 -kernel linux-stable/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0 root=/dev/nfs nfsroot=10.0.2.2:/home/jerome/Documents/projets/kernel/mnt rw ip=10.0.2.15::10.0.2.1:255.255.255.0" -nographic

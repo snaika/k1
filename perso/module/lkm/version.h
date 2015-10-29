@@ -1,0 +1,7 @@
+#ifndef HEADER_VERSION
+#define HEADER_VERSION
+
+# define	VERSION_MODIFIED	0x4242
+# define	VERSION_RESET		0x4243
+
+#endif
