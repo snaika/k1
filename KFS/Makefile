@@ -19,7 +19,7 @@ LDFLAGS	+= -nostdlib -m32 -Wl,--build-id=none
 
 CC	= gcc
 
-QEMU_OPTIONS = -serial pipe:/tmp/serialPipe
+QEMU_OPTIONS = -serial stdio
 
 all: $(NAME)
 
