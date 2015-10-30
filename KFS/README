@@ -1,0 +1,7 @@
+Pour connecter le port série de la machine virtuelle à quelque chose.
+ - mknod /tmp/SerialPipe
+ - Dans les options de qemu, changer le pamètre '-serial xxx' par '-serial pipe:/tmp/SerialPipe
+ - Connecter quelque chose capable de gérer les ports séries à ce pipe ('minicom -s' par exemple)
+ - Lancer qemu
+
+Voilà, si minicom est bien configuré, notamment pour se connecter sur le pipe en question, ça devrait marche.

@@ -19,6 +19,8 @@ LDFLAGS	+= -nostdlib -m32 -Wl,--build-id=none
 
 CC	= gcc
 
+QEMU_OPTIONS = -serial pipe:/tmp/serialPipe
+
 all: $(NAME)
 
 .S.o:
@@ -28,10 +30,10 @@ $(NAME) : $(OBJS)
 	$(CC) $(LDFLAGS) $(OBJS) -T $(LINKER_SCRIPT) -o $(NAME)
 
 boot: all
-	qemu-system-x86_64 -kernel ./${NAME} -serial stdio
+	qemu-system-x86_64 -kernel ./${NAME} $(QEMU_OPTIONS)
 
 debug: all
-	qemu-system-x86_64 -kernel ./${NAME} -s -S -serial stdio & 
+	qemu-system-x86_64 -kernel ./${NAME} -s -S $(QEMU_OPTIONS) &
 	gdb ./${NAME} -ex "target remote localhost:1234" -ex "b main" -ex "c"
 
 clean:

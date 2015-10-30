@@ -21,15 +21,16 @@ void printk(const char *msg)
 
 int main(unsigned int magic_number, const void *multiboot_info)
 {
-  int i = 0;
-  
   init();
+  printk("Hello world !\n");
   while (1)
     {
-      i++;
-
-      if (i % 20000000 == 0)
-	printk("Hello world !\n");
+      char c = serial_read();
+      char str[2];
+      str[0] = c;
+      str[1] = '\0';
+      if (strlen(str) > 0)
+	printk(str);
     }
   return 0;
 }
