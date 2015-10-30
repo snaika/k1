@@ -1,0 +1,36 @@
+From 3b343fcb27fd9c47797ae44b54aafcd8cbe69932 Mon Sep 17 00:00:00 2001
+From: Lethe <alexandre.frizac@epitech.eu>
+Date: Fri, 30 Oct 2015 13:27:24 +0100
+Subject: [PATCH 2/2] Using copy_to_user now
+
+---
+ arch/x86/kernel/uptime.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/kernel/uptime.c b/arch/x86/kernel/uptime.c
+index 9c4e4ca..f17df1c 100644
+--- a/arch/x86/kernel/uptime.c
++++ b/arch/x86/kernel/uptime.c
+@@ -1,6 +1,7 @@
+ #include <linux/kernel.h>
+ #include <linux/time.h>
+ #include <linux/hrtimer.h>
++#include <linux/uaccess.h>
+ 
+ time_t sys_uptime(time_t *t)
+ {
+@@ -9,7 +10,9 @@ time_t sys_uptime(time_t *t)
+   get_monotonic_boottime(&uptime);
+ 
+   if (t != NULL)
+-    *t = uptime.tv_sec;
+-    
++    {
++      if (copy_to_user(t, &(uptime.tv_sec), sizeof(time_t)))
++	return ((time_t) -1);
++    }
+   return uptime.tv_sec;
+ }
+-- 
+2.1.4
+
